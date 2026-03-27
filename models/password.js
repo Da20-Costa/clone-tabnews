@@ -8,7 +8,13 @@ async function hash(password) {
 }
 
 function getNumberOfRounds() {
-  return process.env.NODE_ENV === "development" ? 1 : 14;
+  if (
+    process.env.NODE_ENV === "development" ||
+    process.env.NODE_ENV === "test"
+  ) {
+    return 1;
+  }
+  return 14;
 }
 
 function getPepperedPassword(password) {
